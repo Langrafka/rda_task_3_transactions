@@ -19,8 +19,11 @@ START TRANSACTION;
 INSERT INTO Orders (CustomerID, Date)
 VALUES (1, '2023-01-01');
 
+-- Dynamically get the ID of the new order
+SET @orderID = LAST_INSERT_ID();
+
 INSERT INTO OrderItems (OrderID, ProductID, Count)
-VALUES (1, 1, 1);
+VALUES (@orderID, 1, 1);
 
 UPDATE Products
 SET WarehouseAmount = WarehouseAmount - 1
